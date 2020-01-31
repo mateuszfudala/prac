@@ -25,8 +25,8 @@ class Nieobecnosc(models.Model):
     """Klasa reprezentująca nieobecność pracownika w systemie"""
     tekst = models.CharField('powod nieobecnosci',max_length=100)
     data_pub = models.DateTimeField('data zgłoszenia')
-    data_start = models.DateTimeField('data pierwszego dnia nieobecnosci')
-    data_koniec = models.DateTimeField('data ostatniego dnia nieobecnosci')
+    data_start = models.DateField('data pierwszego dnia nieobecnosci')
+    data_koniec = models.DateField('data ostatniego dnia nieobecnosci')
     autor = models.ForeignKey(User)
 
     class Meta:

@@ -9,8 +9,9 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-from czat.models import Wiadomosc
+from czat.models import Wiadomosc, Nieobecnosc
 from django.views.generic import DeleteView
+from django.contrib.auth.models import User
 
 app_name = 'czat'  # przestrzeń nazw aplikacji
 urlpatterns = [
@@ -31,14 +32,28 @@ urlpatterns = [
             context_object_name='wiadomosci',
             paginate_by=10)),
         name='wiadomosci'),
+    url(r'^nieobecnosci/', login_required(
+        ListView.as_view(
+            model=Nieobecnosc,
+            context_object_name='nieobecnosci',
+            paginate_by=10)),
+        name='nieobecnosci'),
     url(r'^dodaj/$', login_required(
         views.DodajWiadomosc.as_view(),
         login_url='/loguj'),
         name='dodaj'),
+    url(r'^dodajn/$', login_required(
+        views.DodajNieobscnosc.as_view(),
+        login_url='/loguj'),
+        name='dodajn'),
     url(r'^edytuj/(?P<pk>\d+)/', login_required(
         views.EdytujWiadomosc.as_view(),
         login_url='/loguj'),
         name='edytuj'),
+    url(r'^edytujn/(?P<pk>\d+)/', login_required(
+        views.EdytujNieobecnosc.as_view(),
+        login_url='/loguj'),
+        name='edytujn'),
     url(r'^usun/(?P<pk>\d+)/', login_required(
         DeleteView.as_view(
             model=Wiadomosc,
@@ -46,4 +61,11 @@ urlpatterns = [
             success_url='/wiadomosci'),
         login_url='/loguj'),
         name='usun'),
+    url(r'^usunn/(?P<pk>\d+)/', login_required(
+        DeleteView.as_view(
+            model=Nieobecnosc,
+            template_name='czat/nieobecnosc_usun.html',
+            success_url='/nieobecnosci'),
+        login_url='/loguj'),
+        name='usunn'),
 ]

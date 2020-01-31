@@ -1,13 +1,13 @@
 <!-- czat/wiadomosc_list.html -->
 {% extends "czat/baza.html" %}
 
-{% block naglowek %}Wiadomości{% endblock %}
+{% block naglowek %}Nieobecności{% endblock %}
 
 {% block tresc %}
-  <h2>Usuń wiadomość</h2>
+  <h2>Usuń nieobecność</h2>
   <form method="POST">
     {% csrf_token %}
-    <p>Czy na pewno chcesz usunąć wiadomość:<br /><i>{{ object }}</i>?</p>
+    <p>Czy na pewno chcesz usunąć nieobecność:<br /><i>{{ object }}</i>?</p>
     <button type="submit">Usuń</button>
   </form>
 {% endblock %}

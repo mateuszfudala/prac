@@ -1,0 +1,30 @@
+<html>
+  <body>
+    <h1>Użytkownicy</h1>
+
+    <h2>Lista użytkowników:</h2>
+    <ol>
+      {% for user in users %}
+      <li>
+        <strong>{{ request.user.username }}</strong> ({{ request.user.date_joined }}):
+      </li>
+      {% endfor %}
+    </ol>
+
+    {% if is_paginated %}
+      <p>
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Poprzednie</a>
+      {% endif %}
+        Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+      </span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Następne</a>
+      {% endif %}
+      </p>
+    {% endif %}
+
+    <p><a href="{% url 'czat:index' %}">Strona główna</a></p>
+
+  </body>
+</html>
