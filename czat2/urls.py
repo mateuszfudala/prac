@@ -19,6 +19,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('czat.urls')),
-    url(r'^', include('druga.urls')),
     url(r'^admin/', admin.site.urls),
 ]
