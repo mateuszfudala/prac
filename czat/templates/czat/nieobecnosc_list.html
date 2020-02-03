@@ -7,18 +7,29 @@
 {% block tresc %}
   <h2>Lista nieobecności:</h2>
   <ol>
-    {% for nieobecnosc in nieobecnosci %}
-    <li>
-        {% if nieobecnosc.autor.username == user.username %}
-        <strong>{{ nieobecnosc.autor.username }}</strong> ({{ nieobecnosc.data_pub }}):
-        <br /> {{ nieobecnosc.tekst }}
-        <br /> {{ nieobecnosc.data_start }}
-        <br /> {{ nieobecnosc.data_koniec }}
-            &bull; <a href="{% url 'czat:edytujn' nieobecnosc.id %}">Edytuj</a>
-            &bull; <a href="{% url 'czat:usunn' nieobecnosc.id %}">Usuń</a>
-        {% endif %} 
-    </li>
-    {% endfor %}
+      {% if request.user.is_superuser %}
+      {% for nieobecnosc in nieobecnosci %}
+      <li>
+          <strong>{{ nieobecnosc.autor.username }}</strong> ({{ nieobecnosc.data_pub }}):
+          <br /> {{ nieobecnosc.tekst }}
+          <br /> {{ nieobecnosc.data_start }}
+          <br /> {{ nieobecnosc.data_koniec }} 
+      </li>
+      {% endfor %}
+      {% else %}
+      {% for nieobecnosc in nieobecnosci %}
+      <li>
+          {% if nieobecnosc.autor.username == user.username %}
+          <strong>{{ nieobecnosc.autor.username }}</strong> ({{ nieobecnosc.data_pub }}):
+          <br /> {{ nieobecnosc.tekst }}
+          <br /> {{ nieobecnosc.data_start }}
+          <br /> {{ nieobecnosc.data_koniec }}
+              &bull; <a href="{% url 'czat:edytujn' nieobecnosc.id %}">Edytuj</a>
+              &bull; <a href="{% url 'czat:usunn' nieobecnosc.id %}">Usuń</a>
+          {% endif %} 
+      </li>
+      {% endfor %}
+      {% endif %}
   </ol>
 
   {% if is_paginated %}
@@ -38,3 +49,4 @@
 {% block linki3 %}
   <p><a href="{% url 'czat:index' %}">Strona główna</a></p>
 {% endblock %}
+
