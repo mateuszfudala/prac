@@ -15,14 +15,14 @@
   <ol>
     {% for nieobecnosc in nieobecnosci %}
      <li>
+        {% if nieobecnosc.autor.username == user.username %}
         <strong>{{ nieobecnosc.autor.username }}</strong> ({{ nieobecnosc.data_pub }}):
         <br /> {{ nieobecnosc.tekst }}
         <br /> {{ nieobecnosc.data_start }}
-         <br /> {{ nieobecnosc.data_koniec }}
-        {% if nieobecnosc.autor.username == user.username %}
+        <br /> {{ nieobecnosc.data_koniec }}
             &bull; <a href="{% url 'czat:edytujn' nieobecnosc.id %}">Edytuj</a>
             &bull; <a href="{% url 'czat:usunn' nieobecnosc.id %}">Usuń</a>
-        {% endif %}
+        {% endif %} 
     </li>
     {% endfor %}
   </ol>

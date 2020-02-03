@@ -8,11 +8,39 @@ from czat.models import Wiadomosc, Nieobecnosc
 from django.utils import timezone
 from django.contrib import messages
 from django.views.generic.edit import UpdateView
+from django.views.generic import View, ListView, DetailView, DeleteView
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 def index(request):
     """Strona główna aplikacji."""
     # return HttpResponse("Witaj w aplikacji Czat!")
     return render(request, 'czat/index.html')
+
+class UserList(ListView):
+    model = User
+
+class UserDetail(DetailView):
+    model = User
+
+
+class EdytujUser(UpdateView):
+    model = User
+    from czat.forms import EdytujUserForm
+    form_class = EdytujUserForm
+    context_object_name = 'users'
+    template_name = 'czat/user_form.html'
+    success_url = '/users'
+
+#    def get_context_data(self, **kwargs):
+#        context = super(EdytujUser, self).get_context_data(**kwargs)
+#        context['wiadomosci'] = Wiadomosc.objects.filter(
+#            autor=self.request.user)
+#        return context
+
+    def get_object(self, queryset=None):
+        user = User.objects.get(id=self.kwargs['pk'])
+        return user
 
 class DodajWiadomosc(CreateView):
     model = Wiadomosc

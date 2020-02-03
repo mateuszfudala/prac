@@ -1,0 +1,18 @@
+<!-- czat/wiadomosc_list.html -->
+{% extends "czat/baza.html" %}
+
+{% block naglowek %}Wiadomości{% endblock %}
+
+{% block tresc %}
+  <h2>Dodaj wiadomość:</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Zapisz</button>
+  </form>
+
+{% endblock %}
+
+{% block linki3 %}
+  <p><a href="{% url 'czat:index' %}">Strona główna</a></p>
+{% endblock %}

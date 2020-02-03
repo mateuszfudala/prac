@@ -5,13 +5,16 @@
 
 {% block linki1 %}
   <p>Jesteś zalogowany jako {{ user.username }}.</p>
+  {% if request.user.is_superuser %}
+    <p><a href="{% url 'czat:rejestruj' %}">Zarejestruj użytkownika</a></p>
+    <p><a href="{% url 'czat:users' %}">Userzy</a></p>
+    <p><a href="{% url 'czat:dodaj' %}">Dodaj wiadomość</a></p>
+  {% else %}
+    <p><a href="{% url 'czat:dodajn' %}">Zgłoś nieobecność</a></p>
+  {% endif %}
   <p><a href="{% url 'czat:wiadomosci' %}">Wiadomości</a></p>
   <p><a href="{% url 'czat:nieobecnosci' %}">Nieobecności</a></p>
-  <p><a href="{% url 'czat:dodaj' %}">Dodaj wiadomość</a></p>
-  <p><a href="{% url 'czat:dodajn' %}">Zgłoś nieobecność</a></p>
 {% endblock %}
-
 {% block linki2 %}
   <p><a href="{% url 'czat:loguj' %}">Zaloguj się</a></p>
-  <p><a href="{% url 'czat:rejestruj' %}">Zarejestruj się</a></p>
 {% endblock %}

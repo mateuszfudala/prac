@@ -12,10 +12,22 @@ from django.views.generic import ListView
 from czat.models import Wiadomosc, Nieobecnosc
 from django.views.generic import DeleteView
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 app_name = 'czat'  # przestrzeń nazw aplikacji
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^user', views.UserList.as_view(paginate_by=3),
+        name='users'),
+    url(r'^edit/(?P<pk>\d+)/', login_required(
+        views.EdytujUser.as_view()),
+        name='edit'),
+    url(r'^usunuser/(?P<pk>\d+)/',login_required(
+        DeleteView.as_view(
+            model = User,
+            template_name='czat/user_usun.html',
+            success_url='/users')),
+        name='usunuser'),
     url(r'^rejestruj/', CreateView.as_view(
         template_name='czat/rejestruj.html',
         form_class=UserCreationForm,
