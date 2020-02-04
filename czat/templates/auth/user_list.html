@@ -10,9 +10,11 @@
       <ul>
       {% for object in object_list %}
       <li><strong>{{ object.username}}</strong>
-      </br> {{ object.first_name }} {{ object.last_name }}
         &bull; <a href="{% url 'czat:usunuser' object.id %}">Usuń</a>
         &bull; <a href="{% url 'czat:edit' object.id %}">Edytuj</a>
+      </br> {{ object.first_name }} {{ object.last_name }} 
+      </br>{{ object.email }}
+        
       </li>
       {% endfor %}
       </ul> {% else %}

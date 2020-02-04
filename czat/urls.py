@@ -17,7 +17,7 @@ from django.urls import reverse
 app_name = 'czat'  # przestrzeń nazw aplikacji
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^user', views.UserList.as_view(paginate_by=3),
+    url(r'^user', views.UserList.as_view(paginate_by=5),
         name='users'),
     url(r'^edit/(?P<pk>\d+)/', login_required(
         views.EdytujUser.as_view()),
