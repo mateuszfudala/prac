@@ -7,7 +7,7 @@
   <p>Jesteś zalogowany jako {{ user.username }}.</p>
   {% if request.user.is_superuser %}
     <p><a href="{% url 'czat:rejestruj' %}">Zarejestruj użytkownika</a></p>
-    <p><a href="{% url 'czat:users' %}">Urzytkownicy</a></p>
+    <p><a href="{% url 'czat:users' %}">Użytkownicy</a></p>
     <p><a href="{% url 'czat:dodaj' %}">Dodaj wiadomość</a></p>
   {% else %}
     <p><a href="{% url 'czat:dodajn' %}">Zgłoś nieobecność</a></p>
